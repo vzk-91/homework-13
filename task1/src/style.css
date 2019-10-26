@@ -1,0 +1,16 @@
+.input-group{
+    width: 50%;
+    margin: 30px auto;
+}
+
+.buttons{
+    margin: 20px auto;
+    width: 20%;
+}
+
+#table {
+    width: 20%;
+    margin: 0 auto;
+
+    display: none;
+}

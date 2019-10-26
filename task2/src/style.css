@@ -1,0 +1,15 @@
+form{
+    margin: 20px auto;
+}
+
+.image {
+    width: 30%;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+#images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
