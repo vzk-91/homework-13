@@ -10,38 +10,13 @@ const table = document.querySelector("#table");
 
 class LocalStorage {
 
-   get(){
-       let storageValue = localStorage.getItem(inputKey.value);
-      let template = ""
-     if(inputKey.value){
-        let row = `
-        <tr>
-                      <td>${inputKey.value}</td>
-                      <td>${storageValue}</td>
-                  </tr>
-        `
-
-        table.innerHTML += row
-        table.style.display = "block"
-        inputKey.value = "";
-     } else {
-        for (var i = 0; i < localStorage.length; i++){
-            let row = `
-            <tr>
-                          <td>${localStorage.key(i)}</td>
-                          <td>${localStorage.getItem(localStorage.key(i))}</td>
-                      </tr>
-            `
-
-            template += row
-        }
-        table.innerHTML +=template;
-        table.style.display = "block"
-     }
+   get(input){
+       let storageValue = localStorage.getItem(input.value);
+       return storageValue 
    }
 
-    set(){
-       localStorage.setItem(inputKey.value , inputValue.value)
+    set(input1, input2 ){
+       localStorage.setItem(input1.value , input2.value)
        inputKey.value = "";
        inputValue.value = "";
     }
@@ -59,6 +34,56 @@ class LocalStorage {
 
 
 let storageApi = new LocalStorage();
-create.addEventListener('click', storageApi.set)
-clear.addEventListener('click', storageApi.clear)
-show.addEventListener('click', storageApi.get)
+
+
+function showItem() {
+    let stValue = storageApi.get(inputKey)
+    let template = ""
+    if(inputKey.value){
+       let row = `
+       <tr>
+                     <td>${localStorage.key(inputKey.value)}</td>
+                     <td>${stValue}</td>
+                 </tr>
+       `
+
+       table.innerHTML += row
+       table.style.display = "block"
+       inputKey.value = "";
+    
+}else {
+    for (var i = 0; i < localStorage.length; i++){
+        let row = `
+        <tr>
+                      <td>${localStorage.key(i)}</td>
+                      <td>${localStorage.getItem(localStorage.key(i))}</td>
+                  </tr>
+        `
+
+        template += row
+    }
+    table.innerHTML +=template;
+    table.style.display = "block"
+ }
+}
+
+
+function setItem () {
+    storageApi.set(inputKey,inputValue);
+    inputKey.value = "";
+    inputValue.value = "";
+
+}
+
+function clearStorage() {
+    table.innerHTML = ""
+    inputKey.value = "";
+    inputValue.value = "";
+    table.style.display = "none"
+    storageApi.clear();
+}
+
+
+create.addEventListener('click', setItem)
+clear.addEventListener('click', clearStorage)
+show.addEventListener('click', showItem)
